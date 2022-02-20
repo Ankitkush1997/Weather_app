@@ -1,0 +1,13 @@
+@media only screen and (min-width: 888px) {
+    .card{
+        width: 30rem;
+    
+    }
+  }
+
+@media only screen and (min-height:653px){
+    .card{
+        margin-top: 60px;
+    }
+}
+
