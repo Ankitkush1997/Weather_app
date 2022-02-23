@@ -1,96 +1,98 @@
 import React, { useState, useEffect } from "react";
-import './weather.css';
+import "./weather.css";
 
 const Weather = () => {
-    const initialValue = {
-        "coord": {
-        "lon": 78.6,
-        "lat": 27.1
-        },
-        "weather": [
-        {
-        "id": 800,
-        "main": "Clear",
-        "description": "clear sky",
-        "icon": "01n"
-        }
-        ],
-        "base": "stations",
-        "main": {
-        "temp": 289.34,
-        "feels_like": 288.22,
-        "temp_min": 289.34,
-        "temp_max": 289.34,
-        "pressure": 1008,
-        "humidity": 46,
-        "sea_level": 1008,
-        "grnd_level": 989
-        },
-        "visibility": 10000,
-        "wind": {
-        "speed": 3.1,
-        "deg": 313,
-        "gust": 4.11
-        },
-        "clouds": {
-        "all": 0
-        },
-        "dt": 1645374488,
-        "sys": {
-        "country": "IN",
-        "sunrise": 1645319915,
-        "sunset": 1645360829
-        },
-        "timezone": 19800,
-        "id": 1256529,
-        "name": "Shikohabad",
-        "cod": 200
-        };
-      const [values, setvalues] = useState(initialValue);
-      const [city, setcity] = useState("shikohabad");
-      const fetchData = async () => {
-        try{await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f67e06214338ecffed62287f89b7c9c1`).then(res => res.json()).then(result => {
-          setvalues(result)
-          console.log(result);
-        })}
-        catch(err){
-          console.log("error to fetch"+"err");
-        }    
+  const initialValue = {
+    coord: {
+      lon: 78.6,
+      lat: 27.1,
+    },
+    weather: [
+      {
+        id: 800,
+        main: "Clear",
+        description: "clear sky",
+        icon: "01n",
+      },
+    ],
+    base: "stations",
+    main: {
+      temp: 289.34,
+      feels_like: 288.22,
+      temp_min: 289.34,
+      temp_max: 289.34,
+      pressure: 1008,
+      humidity: 46,
+      sea_level: 1008,
+      grnd_level: 989,
+    },
+    visibility: 10000,
+    wind: {
+      speed: 3.1,
+      deg: 313,
+      gust: 4.11,
+    },
+    clouds: {
+      all: 0,
+    },
+    dt: 1645374488,
+    sys: {
+      country: "IN",
+      sunrise: 1645319915,
+      sunset: 1645360829,
+    },
+    timezone: 19800,
+    id: 1256529,
+    name: "Shikohabad",
+    cod: 200,
+  };
+  const [values, setvalues] = useState(initialValue);
+  const [city, setcity] = useState("shikohabad");
+  
+  useEffect(() => {
+      try {
+        fetch(
+          `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f67e06214338ecffed62287f89b7c9c1`
+        )
+          .then((res) => res.json())
+          .then((result) => {
+            setvalues(result);
+          });
+      } catch (err) {
+        console.log("error to fetch" + err);
       }
-      useEffect(()=>{
-       fetchData()}
-      ,[city])
-    
-      const handleSubmit = () => {
-        const searchField = document.getElementById("searchInput").value;
-        console.log(searchField);
-        setcity(searchField);
-      };
+    }
+  , [city]);
+
+  const handleSubmit = () => {
+    const searchField = document.getElementById("searchInput").value;
+    setcity(searchField);
+  };
   return (
     <div className="container mt-2 mb-2">
       <div className="card mx-auto shadow p-3 bg-body">
         <div className="text-center">
           <h2> Weather APP</h2>
         </div>
-        
-          <div className="input-group mb-3">
-            <input
-              placeholder="Search City"
-              type="text"
-              id="searchInput"
-              className="form-control mx-5"
-              aria-label="Sizing example input"
-              aria-describedby="inputGroup-sizing-default"
-            />
-          </div>
-          <p
-            className="card-text"
-            style={{ display: "flex", justifyContent: "center" }}
-          >
-            <button onClick={handleSubmit}  className="btn btn-primary">
-              Search City
-            </button>
-          </p>
+
+        <div className="input-group mb-3">
+          <input
+            placeholder="Search City"
+            type="text"
+            id="searchInput"
+            className="form-control mx-5"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-default"
+          />
+        </div>
+        <p
+          className="card-text"
+          style={{ display: "flex", justifyContent: "center" }}
+        >
+          <button onClick={handleSubmit} className="btn btn-primary">
+            Search City
+          </button>
+        </p>
 
         <div className="card-body">
           <p className="card-text text-center">
@@ -170,7 +172,7 @@ const Weather = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Weather
+export default Weather;
